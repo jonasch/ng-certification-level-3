@@ -1,0 +1,11 @@
+{{ item.dt * 1000 | date: 'fullDate' }}: {{ item.weather[0].main }} - Min:
+{{ item.temp.min }}- Max: {{ item.temp.max }}
+
+<img
+  class="icon"
+  [src]="
+    'https://www.angulartraining.com/images/weather/' +
+    (item.weather[0].id | weather) +
+    '.png'
+  "
+/>

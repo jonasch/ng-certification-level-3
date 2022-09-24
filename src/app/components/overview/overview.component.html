@@ -1,0 +1,10 @@
+<div class="container-fluid">
+  <app-zipcode-form></app-zipcode-form>
+
+  <div *ngFor="let data of currentData">
+    <app-current-weather-card
+      [data]="data"
+      (close)="onRemove($event)"
+    ></app-current-weather-card>
+  </div>
+</div>

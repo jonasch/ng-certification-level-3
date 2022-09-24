@@ -1,0 +1,40 @@
+<div class="card card-body bg-light d-flex flex-row">
+  <div
+    class="card-body"
+    *ngIf="data.currentWeather; let currentWeather; else: notification"
+  >
+    <h3>{{ currentWeather.name }} ({{ data.zip }})</h3>
+    <h4>Current conditions: {{ currentWeather.weather[0].main }}</h4>
+    <h4>Temperatures today:</h4>
+    <p>
+      Current {{ currentWeather.main.temp }} - Max
+      {{ currentWeather.main.temp_max }} - Min
+      {{ currentWeather.main.temp_min }}
+    </p>
+    <p>
+      <a [href]="'/forecast/' + data.zip"
+        >Show 5-day forecast for {{ currentWeather.name }}</a
+      >
+    </p>
+  </div>
+  <div>
+    <img
+      *ngIf="data.currentWeather"
+      [src]="
+        'https://www.angulartraining.com/images/weather/' +
+        (data.currentWeather.weather[0].id | weather) +
+        '.png'
+      "
+    />
+  </div>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="onRemoveClicked()"
+  ></button>
+</div>
+
+<ng-template #notification>
+  <h3>{{ data.zip }}: {{ data.notification }}</h3>
+</ng-template>

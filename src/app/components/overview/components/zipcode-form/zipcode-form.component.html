@@ -1,0 +1,39 @@
+<div class="card card-body bg-light">
+  <h2>Enter a zipcode:</h2>
+  <form (ngSubmit)="onAddLocation()" #zipcodeForm="ngForm">
+    <input
+      class="form-control"
+      placeholder="Zipcode"
+      required
+      type="text"
+      name="zipcode"
+      id="zipcode"
+      #zipcode="ngModel"
+      [(ngModel)]="formModel.zipcode"
+    />
+    <br />
+    <input
+      class="form-control"
+      placeholder="Country"
+      type="text"
+      id="country"
+      name="country"
+      [(ngModel)]="countrySearchValue"
+      (ngModelChange)="searchCountry($event)"
+    />
+    <br />
+    <button
+      type="submit"
+      [disabled]="!zipcodeForm.form.valid"
+      class="btn btn-primary"
+      id="addLocationBtn"
+    >
+      Add Location
+    </button>
+  </form>
+  <p>
+    <ng-container *ngFor="let country of countries"
+      >{{ country.name.common }},
+    </ng-container>
+  </p>
+</div>

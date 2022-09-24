@@ -1,0 +1,42 @@
+<ng-container *ngIf="forecastData$ | async as forecastData; else loading">
+  <div class="container-fluid">
+    <div
+      class="content"
+      *ngIf="forecastData.forecastWeather; else notification"
+    >
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            {{ forecastData.forecastWeather.cnt }}-day forecast for
+            {{ forecastData.forecastWeather.city.name }}
+          </h3>
+        </div>
+        <ul class="list-group">
+          <!---->
+          <li
+            class="list-group-item"
+            *ngFor="let item of forecastData.forecastWeather.list"
+          >
+            <app-forecast-item [item]="item"></app-forecast-item>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <ng-template #notification>
+      <h3>{{ forecastData.zip }}: {{ forecastData.notification }}</h3>
+    </ng-template>
+
+    <button
+      class="btn btn-success"
+      tabindex="0"
+      id="mainPageBtn"
+      (click)="goHome()"
+    >
+      &lt; Back to main page
+    </button>
+  </div>
+</ng-container>
+
+<ng-template #loading>
+  <h2>Loading forecast...</h2>
+</ng-template>
