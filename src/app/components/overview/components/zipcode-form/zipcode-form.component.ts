@@ -13,7 +13,8 @@ export class ZipcodeFormComponent {
     zipcode: '',
     country: undefined,
   };
-  zipcode = '';
+
+  countrySearchValue = '';
   countries: Country[] = [];
   constructor(
     private zipcodeService: ZipcodeManagerService,
