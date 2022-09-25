@@ -11,6 +11,7 @@ import { CurrentWeatherCardComponent } from './components/overview/components/cu
 import { OverviewComponent } from './components/overview/overview.component';
 import { ForecastItemComponent } from './components/forecast/components/forecast-item/forecast-item.component';
 import { WeatherPipe } from './pipes/weather.pipe';
+import { AutocompleteSelectComponent } from './components/shared/autocomplete-select/autocomplete-select.component';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, HttpClientModule, AppRoutingModule],
@@ -22,6 +23,7 @@ import { WeatherPipe } from './pipes/weather.pipe';
     OverviewComponent,
     ForecastItemComponent,
     WeatherPipe,
+    AutocompleteSelectComponent,
   ],
   bootstrap: [AppComponent],
 })

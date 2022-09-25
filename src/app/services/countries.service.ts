@@ -1,35 +1,27 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { environment } from '../../assets/environments/environment';
-import { Country } from '../models/country';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {environment} from '../../assets/environments/environment';
+import {Country} from '../models/country';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+    providedIn: 'root',
 })
 export class CountriesService {
-  countries: Country[] = [];
+    _countries = new BehaviorSubject<Country[]>([]);
 
-  constructor(private http: HttpClient) {
-    this.getAllCountries().subscribe((data) => (this.countries = data));
-  }
+    constructor(private http: HttpClient) {
+        this.fetchAllCountries().subscribe((data) => (this._countries.next(data)));
+    }
 
-  getAllCountries() {
-    return this.http.get<Country[]>(
-      `${environment.restcountries.BASE_URL}/all`
-    );
-  }
+    private fetchAllCountries() {
+        return this.http.get<Country[]>(
+            `${environment.restcountries.BASE_URL}/all`
+        );
+    }
 
-  searchCountries(searchValue: string): Country[] {
-    return this.countries
-      .filter((country) =>
-        country.name.common.toLowerCase().includes(searchValue.toLowerCase())
-      )
-      .sort((a, b) =>
-        a.name.common < b.name.common
-          ? -1
-          : a.name.common === b.name.common
-          ? 0
-          : 1
-      );
-  }
+    getCountries(): Observable<Country[]> {
+        return this._countries.asObservable();
+    }
+
 }
