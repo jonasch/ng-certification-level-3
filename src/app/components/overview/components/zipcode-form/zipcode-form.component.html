@@ -1,6 +1,6 @@
 <div class="card card-body bg-light">
     <h2>Enter a zipcode:</h2>
-    <form (ngSubmit)="onAddLocation();this.zipcodeForm.resetForm();" #zipcodeForm="ngForm">
+    <form #zipcodeForm="ngForm">
         <input
                 class="form-control"
                 placeholder="Zipcode"
@@ -12,15 +12,17 @@
         />
         <br/>
         <app-autocomplete-select [name]="'country'" [options]="countryOptions" (optionSelect)="onSelect($event)"></app-autocomplete-select>
-
         <br/>
-        <button
-                type="submit"
-                [disabled]="!zipcodeForm.form.valid"
-                class="btn btn-primary"
-                id="addLocationBtn"
-        >
-            Add Location
-        </button>
+        <app-status-button id="addLocationBtn" [observable]="observable" [disabled]="!zipcodeForm.form.valid" [type]="'submit'" [cssClassConfig]="cssClassConfig">
+            <ng-container inital>
+                Add Location
+            </ng-container>
+            <ng-container waiting>
+                Adding...
+            </ng-container>
+            <ng-container done>
+                <i class="bi bi-check2-circle"></i> Done
+            </ng-container>
+        </app-status-button>
     </form>
 </div>

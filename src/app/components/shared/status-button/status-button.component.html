@@ -1,0 +1,16 @@
+<button [type]="type" [ngClass]="classConfig" (click)="onClick()" [disabled]="disabled">
+    <ng-container [ngSwitch]="_state$ | async">
+        <ng-container *ngSwitchCase="'waiting'">
+            <ng-content select="[waiting]"></ng-content>
+        </ng-container>
+        <ng-container *ngSwitchCase="'done'">
+            <ng-content select="[done]"></ng-content>
+        </ng-container>
+        <ng-container *ngSwitchCase="'error'">
+            <ng-content select="[error]"></ng-content>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+            <ng-content select="[inital]"></ng-content>
+        </ng-container>
+    </ng-container>
+</button>
